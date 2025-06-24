@@ -1,0 +1,13 @@
+com\umgc\user\UserController.class
+com\umgc\user\UserRepository.class
+com\umgc\user\User.class
+com\umgc\user\UserService.class
+com\umgc\userAccess\UserAccessController.class
+com\umgc\attendancelog\AttendanceLogRepository.class
+com\umgc\attendancelog\AttendanceLogService.class
+com\umgc\attendancelog\AttendanceLogController.class
+com\umgc\userAccess\UserAccessRepository.class
+com\umgc\StartApplication.class
+com\umgc\userAccess\UserAccessService.class
+com\umgc\attendancelog\AttendanceLog.class
+com\umgc\userAccess\UserAccess.class

@@ -1,0 +1,5 @@
+com\umgc\remoteterminal\RemoteTerminalService.class
+com\umgc\remoteterminal\RemoteTerminal.class
+com\umgc\StartRemoteTerminalApplication.class
+com\umgc\remoteterminal\RemoteTerminalRepository.class
+com\umgc\remoteterminal\RemoteTerminalControler.class
