@@ -11,3 +11,4 @@ com\umgc\StartApplication.class
 com\umgc\userAccess\UserAccessService.class
 com\umgc\attendancelog\AttendanceLog.class
 com\umgc\userAccess\UserAccess.class
+com\umgc\attendancelog\ServiceProperties.class
