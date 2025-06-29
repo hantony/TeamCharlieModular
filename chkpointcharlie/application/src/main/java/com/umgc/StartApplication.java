@@ -28,7 +28,7 @@ public class StartApplication {
 	// Spring runs CommandLineRunner bean when Spring Boot App starts
 
 	@Bean
-	public CommandLineRunner initialUsers(UserRepository userRepository) {
+	public CommandLineRunner initializeUsers(UserRepository userRepository) {
 		return (args) -> {
 			
 			User u1 = new User("Alice Johnson", "Student", "CARD1001", "Status01");
@@ -50,7 +50,7 @@ public class StartApplication {
 	}
 	
     @Bean
-    public CommandLineRunner initialAttendanceLogEntries(AttendanceLogRepository attendanceLogRepository) {
+    public CommandLineRunner initializeAttendanceLogEntries(AttendanceLogRepository attendanceLogRepository) {
         return (args) -> {
         	
         	Date date = new Date();

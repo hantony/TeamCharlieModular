@@ -22,11 +22,8 @@ public class StartRemoteTerminalApplication {
 		SpringApplication.run(StartRemoteTerminalApplication.class, args);
 	}
 
-	// Spring runs CommandLineRunner bean when Spring Boot App starts
-
-
 	@Bean
-	public CommandLineRunner initialUsers(RemoteTerminalRepository remoteTerminalRepository) {
+	public CommandLineRunner initialTerminals(RemoteTerminalRepository remoteTerminalRepository) {
 		return (args) -> {
 			
 			RemoteTerminal rt1 = new RemoteTerminal ("Lecture Hall A" );
@@ -36,7 +33,7 @@ public class StartRemoteTerminalApplication {
 			// save a few users, ID auto increase, expect 1, 2, 3, 4
 			remoteTerminalRepository.saveAll(List.of(rt1, rt2, rt3));
 			
-			// find all users
+			// find all termainals
 			log.info("-------------------------------");
 			log.info("findAll(), expect 3 remote terminals");
 			log.info("-------------------------------");
