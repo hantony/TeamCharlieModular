@@ -3,6 +3,7 @@ package com.umgc.remoteterminal;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -59,13 +60,13 @@ public class RemoteTerminalControllerTest {
 
 		remoteTerminalRepository.deleteAll();
 		
-		RemoteTerminal terminalA = new RemoteTerminal("locA");
-		RemoteTerminal terminalB = new RemoteTerminal("locB");
-		RemoteTerminal terminalC = new RemoteTerminal("locC");
-		RemoteTerminal terminalD = new RemoteTerminal("locD");
-
-
-
+		Date date = new Date();
+		
+		RemoteTerminal terminalA = new RemoteTerminal("locA", 3L, date.getTime() );
+		RemoteTerminal terminalB = new RemoteTerminal("locB", 3L, date.getTime() );
+		RemoteTerminal terminalC = new RemoteTerminal("locC", 4L, date.getTime() );
+		RemoteTerminal terminalD = new RemoteTerminal("locD", 4L, date.getTime() );
+		
 		remoteTerminalRepository.saveAll(List.of(terminalA, terminalB, terminalC, terminalD));
 	}
 
@@ -86,8 +87,10 @@ public class RemoteTerminalControllerTest {
 	public void testCreate() {
 
 		// Create a new Remote Terminal Entry E
+		
+		Date date = new Date();
 
-		RemoteTerminal terminalE = new RemoteTerminal("locE");
+		RemoteTerminal terminalE = new RemoteTerminal("locE", 3L, date.getTime() );
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("Content-Type", "application/json");
 		HttpEntity<RemoteTerminal> request = new HttpEntity<>(terminalE, headers);
@@ -109,18 +112,19 @@ public class RemoteTerminalControllerTest {
 	public void testDeleteById() {
 
 		// Create a new Remote Terminal F
-
-		RemoteTerminal newTermainF = new RemoteTerminal("locE" );
 		
-		remoteTerminalRepository.save(newTermainF);
+		Date date = new Date();
+		RemoteTerminal newTerminalF = new RemoteTerminal("locF", 3L, date.getTime() );
+		
+		remoteTerminalRepository.save(newTerminalF);
 
 		// find Remote Terminal E
-		Long newTerminalId = newTermainF.getId();
+		Long newTerminalId = newTerminalF.getId();
 		Optional<RemoteTerminal> result = remoteTerminalRepository.findById(newTerminalId);
         assertTrue(!result.isEmpty());
 		
         // Delete Remote Terminal E
-        remoteTerminalRepository.deleteById(newTermainF.getId());
+        remoteTerminalRepository.deleteById(newTerminalF.getId());
 		
         result = remoteTerminalRepository.findById(newTerminalId);
         assertTrue(result.isEmpty());

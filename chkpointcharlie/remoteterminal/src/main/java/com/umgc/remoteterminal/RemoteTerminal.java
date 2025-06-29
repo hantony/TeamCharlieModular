@@ -15,11 +15,20 @@ public class RemoteTerminal {
     private Long id;
     
     private String location;
+    private Long userId;
+    private Long entryTime;
     
- 
-	public RemoteTerminal(String location) {
-		super();		
+    
+    
+	public RemoteTerminal() {
+		super();
+	}
+
+	public RemoteTerminal(String location, Long userId, Long entryTime) {
+		super();
 		this.location = location;
+		this.userId = userId;
+		this.entryTime = entryTime;
 	}
 
 	public Long getId() {
@@ -38,15 +47,29 @@ public class RemoteTerminal {
 		this.location = location;
 	}
 
-	public RemoteTerminal() {
-		super();
-		
+	public Long getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Long userId) {
+		this.userId = userId;
+	}
+
+	public Long getEntryTime() {
+		return entryTime;
+	}
+
+	public void setEntryTime(Long entryTime) {
+		this.entryTime = entryTime;
 	}
 
 	@Override
 	public String toString() {
-		return "RemoteTerminal [id=" + id + ", location=" + location + "]";
+		return "RemoteTerminal [id=" + id + ", location=" + location + ", userId=" + userId + ", entryTime=" + entryTime
+				+ "]";
 	}
+
+
 
 }
 

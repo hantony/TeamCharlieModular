@@ -32,6 +32,8 @@ public class AttendanceLog {
 		this.entryType = entryType;
 		this.location = location;
 	}
+	
+	
 
 	public Long getId() {
 		return id;
