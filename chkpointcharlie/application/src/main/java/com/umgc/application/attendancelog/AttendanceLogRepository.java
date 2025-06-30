@@ -10,7 +10,9 @@ public interface AttendanceLogRepository extends JpaRepository<AttendanceLog, Lo
 
    List<AttendanceLog> findByUserId(Long userId);
 
-Optional<AttendanceLog> findByLocation(String location);
+
+
+Optional<AttendanceLog> findByEntryType(String entryType);
 
 //   Custom query
 //       @Query("SELECT b FROM Book b WHERE b.publishDate > :date")

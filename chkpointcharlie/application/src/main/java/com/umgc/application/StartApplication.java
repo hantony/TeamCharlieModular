@@ -65,11 +65,11 @@ public class StartApplication {
     		Long terminalId3 = Long.valueOf(3);
     		Long terminalId4 = Long.valueOf(4);
     		
-    		AttendanceLog newLog1 = new AttendanceLog(userId1, terminalId1, date.getTime(), "entryTypeA", "Main Gate");
-    		AttendanceLog newLog2 = new AttendanceLog(userId2, terminalId2, date.getTime()+1, "entryTypeB", "Main Gate");
-    		AttendanceLog newLog3 = new AttendanceLog(userId3, terminalId3, date.getTime()+2, "entryTypeC", "Admin Entrance");
-    		AttendanceLog newLog4 = new AttendanceLog(userId4, terminalId4, date.getTime()+3, "entryTypeD", "Service Door");
-    		AttendanceLog newLog5 = new AttendanceLog(userId4, terminalId4, date.getTime()+3, "entryTypeD", "Main Gate");
+    		AttendanceLog newLog1 = new AttendanceLog(userId1, terminalId1, date.getTime(),   "entryTypeA" );
+    		AttendanceLog newLog2 = new AttendanceLog(userId2, terminalId2, date.getTime()+1, "entryTypeB");
+    		AttendanceLog newLog3 = new AttendanceLog(userId3, terminalId3, date.getTime()+2, "entryTypeC");
+    		AttendanceLog newLog4 = new AttendanceLog(userId4, terminalId4, date.getTime()+3, "entryTypeD");
+    		AttendanceLog newLog5 = new AttendanceLog(userId4, terminalId4, date.getTime()+3, "entryTypeD");
         	
            
             // save a few users, ID auto increase, expect 1, 2, 3, 4

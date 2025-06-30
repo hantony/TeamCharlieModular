@@ -23,6 +23,11 @@ public class RemoteTerminal {
 	public RemoteTerminal() {
 		super();
 	}
+	
+	public RemoteTerminal(String location ) {
+		super();
+		this.location = location;
+	}
 
 	public RemoteTerminal(String location, Long userId, Long entryTime) {
 		super();
