@@ -77,7 +77,7 @@ public class UserControllerTest {
 		// find all Users and return List<User>
 		ParameterizedTypeReference<List<User>> typeRef = new ParameterizedTypeReference<>() {
 		};
-		ResponseEntity<List<User>> response = restTemplate.exchange(BASEURI + "/Users", HttpMethod.GET, null, typeRef);
+		ResponseEntity<List<User>> response = restTemplate.exchange(BASEURI + "/User", HttpMethod.GET, null, typeRef);
 
 		assertEquals(HttpStatus.OK, response.getStatusCode());
 		assertEquals(4, response.getBody().size());
@@ -95,7 +95,7 @@ public class UserControllerTest {
 		HttpEntity<User> request = new HttpEntity<>(newUser, headers);
 
 		// test POST save
-		ResponseEntity<User> responseEntity = restTemplate.postForEntity(BASEURI + "/Users", request, User.class);
+		ResponseEntity<User> responseEntity = restTemplate.postForEntity(BASEURI + "/User", request, User.class);
 
 		assertEquals(HttpStatus.CREATED, responseEntity.getStatusCode());
 

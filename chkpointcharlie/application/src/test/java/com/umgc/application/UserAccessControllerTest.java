@@ -105,7 +105,7 @@ public class UserAccessControllerTest {
 
 		// Test User EEE details
 		UserAccess myUserAccess = list.get(0);
-		assertEquals("locE", myUserAccess.getUserId());
+		assertEquals(1L, myUserAccess.getUserId());
 		
 	}
 	
