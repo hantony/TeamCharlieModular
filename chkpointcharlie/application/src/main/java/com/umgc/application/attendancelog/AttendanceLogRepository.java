@@ -12,7 +12,7 @@ public interface AttendanceLogRepository extends JpaRepository<AttendanceLog, Lo
 
 
 
-Optional<AttendanceLog> findByEntryType(String entryType);
+Optional<AttendanceLog> findByTerminalId(Long terminalId);
 
 //   Custom query
 //       @Query("SELECT b FROM Book b WHERE b.publishDate > :date")

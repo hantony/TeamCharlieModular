@@ -73,10 +73,10 @@ public class AttendanceLogServiceTest {
 		Long terminalId3 = Long.valueOf(3);
 		Long terminalId4 = Long.valueOf(4);
 		
-		AttendanceLog newLog1 = new AttendanceLog(userId1, terminalId1, date.getTime(), "entryTypeA" );
-		AttendanceLog newLog2 = new AttendanceLog(userId2, terminalId2, date.getTime()+1, "entryTypeB");
-		AttendanceLog newLog3 = new AttendanceLog(userId3, terminalId3, date.getTime()+2, "entryTypeC");
-		AttendanceLog newLog4 = new AttendanceLog(userId4, terminalId4, date.getTime()+3, "entryTypeD");
+		AttendanceLog newLog1 = new AttendanceLog(userId1, terminalId1, date.getTime()   );
+		AttendanceLog newLog2 = new AttendanceLog(userId2, terminalId2, date.getTime()+1 );
+		AttendanceLog newLog3 = new AttendanceLog(userId3, terminalId3, date.getTime()+2 );
+		AttendanceLog newLog4 = new AttendanceLog(userId4, terminalId4, date.getTime()+3 );
 		
 		attendanceLogService.save(newLog1);
 		attendanceLogService.save(newLog2);
@@ -90,7 +90,7 @@ public class AttendanceLogServiceTest {
 
 	        // Create a new attendance log entry
 	        AttendanceLog alog = new AttendanceLog();
-	        alog.setEntryType("entryA");
+	        alog.setTerminalId(1L);
 	        
 
 	        // save attendance log entry
@@ -102,7 +102,7 @@ public class AttendanceLogServiceTest {
 
 	        AttendanceLog alogFromGet = result.get();
 
-	        assertEquals("entryA", alogFromGet.getEntryType());
+	        assertEquals(1L, alogFromGet.getTerminalId());
 	        
 
 	    }

@@ -1,4 +1,4 @@
-package com.umgc.application;
+ package com.umgc.application;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -34,7 +34,7 @@ public class AttendanceLogRepositoryTest {
 
         // Create a new attendance log entry
         AttendanceLog alog = new AttendanceLog();
-        alog.setEntryType("EntryA");
+        alog.setTerminalId(2L);
         
 
         // save attendance log entry
@@ -46,7 +46,7 @@ public class AttendanceLogRepositoryTest {
 
         AttendanceLog alogFromGet = result.get();
 
-        assertEquals("EntryA", alogFromGet.getEntryType());
+        assertEquals(2L, alogFromGet.getTerminalId());
         
 
     }
@@ -55,14 +55,14 @@ public class AttendanceLogRepositoryTest {
     public void testAttendanceLogCRUD() {
 
     	AttendanceLog alogB = new AttendanceLog();
-    	 alogB.setEntryType("entryB");
+    	 alogB.setTerminalId(3L);
        
 
         // save attendance log entry
         attendanceLogRepository.save(alogB);
 
         // find attendance log entry by id
-        Optional<AttendanceLog> result = attendanceLogRepository.findByEntryType(alogB.getEntryType() );
+        Optional<AttendanceLog> result = attendanceLogRepository.findByTerminalId(alogB.getTerminalId() );
         assertTrue(result.isPresent());
 
         AttendanceLog aLogFromGet = result.get();
@@ -70,7 +70,7 @@ public class AttendanceLogRepositoryTest {
         Long aLogId = aLogFromGet.getId();
         
         // update attendance log entry
-        alogB.setEntryType("entryBBB");
+        alogB.setTerminalId(4L);
         attendanceLogRepository.save(alogB);
 
         // find attendance log entry by id
@@ -79,7 +79,7 @@ public class AttendanceLogRepositoryTest {
 
         AttendanceLog alogFromGet2 = result2.get();
 
-        assertEquals("entryBBB", alogFromGet2.getEntryType());
+        assertEquals(4L, alogFromGet2.getTerminalId());
        
 
         // delete a attendance log entry

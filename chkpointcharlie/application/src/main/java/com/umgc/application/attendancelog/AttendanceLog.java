@@ -17,13 +17,12 @@ public class AttendanceLog {
     private Long terminalId;
     
     private Long entryTime;
-    private String entryType;
-	public AttendanceLog(Long userId, Long terminalId, Long entryTime, String entryType) {
+    
+	public AttendanceLog(Long userId, Long terminalId, Long entryTime ) {
 		super();
 		this.userId = userId;
 		this.terminalId = terminalId;
 		this.entryTime = entryTime;
-		this.entryType = entryType;
 	}
 	public AttendanceLog() {
 		super();
@@ -52,19 +51,13 @@ public class AttendanceLog {
 	public void setEntryTime(Long entryTime) {
 		this.entryTime = entryTime;
 	}
-	public String getEntryType() {
-		return entryType;
-	}
-	public void setEntryType(String entryType) {
-		this.entryType = entryType;
-	}
 	@Override
 	public String toString() {
 		return "AttendanceLog [id=" + id + ", userId=" + userId + ", terminalId=" + terminalId + ", entryTime="
-				+ entryTime + ", entryType=" + entryType + "]";
+				+ entryTime + "]";
 	}
-   
-    
+
+	
 	
 
 }
