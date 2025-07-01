@@ -74,9 +74,6 @@ public class AttendanceLogControllerTest {
 		Long terminalId3 = Long.valueOf(3);
 		Long terminalId4 = Long.valueOf(4);
 		
-//		public AttendanceLog(Long userId, Long terminalId, Long entryTime, String entryType) {
-//			
-//		}
 		AttendanceLog newLog1 = new AttendanceLog(userId1, terminalId1, date.getTime(), "entryTypeA");
 		AttendanceLog newLog2 = new AttendanceLog(userId2, terminalId2, date.getTime()+1, "entryTypeB");
 		AttendanceLog newLog3 = new AttendanceLog(userId3, terminalId3, date.getTime()+2, "entryTypeC");

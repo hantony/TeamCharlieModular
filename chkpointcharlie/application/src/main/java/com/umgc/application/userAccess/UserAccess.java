@@ -10,22 +10,23 @@ import jakarta.persistence.Id;
 
 @Entity
 public class UserAccess {
+	
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    private Long userId;
+    private Long locationId;
     
-    private String location;
-
     
 	public UserAccess() {
 		super();
-		
 	}
 
 
-	public UserAccess(String location) {
+	public UserAccess(Long userId, Long locationId) {
 		super();
-		this.location = location;
+		this.userId = userId;
+		this.locationId = locationId;
 	}
 
 
@@ -39,22 +40,31 @@ public class UserAccess {
 	}
 
 
-	public String getLocation() {
-		return location;
+	public Long getUserId() {
+		return userId;
 	}
 
 
-	public void setLocation(String location) {
-		this.location = location;
+	public void setUserId(Long userId) {
+		this.userId = userId;
+	}
+
+
+	public Long getLocationId() {
+		return locationId;
+	}
+
+
+	public void setLocationId(Long locationId) {
+		this.locationId = locationId;
 	}
 
 
 	@Override
 	public String toString() {
-		return "userAccess [id=" + id + ", location=" + location + ", getId()=" + getId() + ", getLocation()="
-				+ getLocation() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()="
-				+ super.toString() + "]";
+		return "UserAccess [id=" + id + ", userId=" + userId + ", locationId=" + locationId + "]";
 	}
-
+    
+ 
 }
 

@@ -8,7 +8,6 @@
     <packaging>pom</packaging>
 
     <modules>
-
         <module>application</module>
         <module>remoteterminal</module>
     </modules>

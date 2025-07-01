@@ -12,6 +12,8 @@ import org.springframework.context.annotation.Bean;
 
 import com.umgc.application.attendancelog.AttendanceLog;
 import com.umgc.application.attendancelog.AttendanceLogRepository;
+import com.umgc.application.location.Location;
+import com.umgc.application.location.LocationRepository;
 import com.umgc.application.user.User;
 import com.umgc.application.user.UserRepository;
 
@@ -26,22 +28,50 @@ public class StartApplication {
 	}
 
 	// Spring runs CommandLineRunner bean when Spring Boot App starts
+	
+	String LECTURE_HALL_A = "Lecture Hall A";
+	String STUDENT_LOUNGE = "Student Lounge";
+	String FACULTY_LOUNGE = "Faculty Lounge";
+	
+	@Bean
+	public CommandLineRunner initializeLocations (LocationRepository locationRepository) {
+		return (args) -> {
+			
+			Location loc1 = new Location(LECTURE_HALL_A);
+			Location loc2 = new Location(STUDENT_LOUNGE);
+			Location loc3 = new Location(FACULTY_LOUNGE);
+			
+			
+			// save a few users, ID auto increase, expect 1, 2, 3, 4
+			locationRepository.saveAll(List.of(loc1, loc2, loc3));
+			
+			// find all users
+			log.info("-------------------------------");
+			log.info("findAll(), expect 3 locations");
+			log.info("-------------------------------");
+			for (Location loc: locationRepository.findAll()) {
+				log.info(loc.toString());
+			}
+		};
+	}
 
 	@Bean
 	public CommandLineRunner initializeUsers(UserRepository userRepository) {
 		return (args) -> {
 			
 			User u1 = new User("Alice Johnson", "Student", "CARD1001", "Status01");
-			User u2 = new User("Dr. Dolittle", "Professor", "CARD1002", "Status02");
-			User u3 = new User("Will Hunting", "Maintenance", "CARD1003", "Status03");
-			User u4 = new User("Dana White", "Technical Support", "CARD1004", "Status04");
+			User u2 = new User("Dextor Poindexter", "Student", "CARD1002", "Status01");
+			User u3 = new User("Dr. Dolittle", "Professor", "CARD1003", "Status02");
+			User u4 = new User("Dr. Annalise Keating", "Professor", "CARD1004", "Status02");
+			User u5 = new User("Will Hunting", "Maintenance", "CARD105", "Status03");
+			User u6 = new User("Dana White", "Technical Support", "CARD1006", "Status03");
 			
-			// save a few users, ID auto increase, expect 1, 2, 3, 4
-			userRepository.saveAll(List.of(u1, u2, u3, u4));
+			// save a few users, ID auto increase, expect 1, 2, 3, 4 ...
+			userRepository.saveAll(List.of(u1, u2, u3, u4, u5, u6));
 			
 			// find all users
 			log.info("-------------------------------");
-			log.info("findAll(), expect 4 users");
+			log.info("findAll(), expect 6 users");
 			log.info("-------------------------------");
 			for (User user : userRepository.findAll()) {
 				log.info(user.toString());

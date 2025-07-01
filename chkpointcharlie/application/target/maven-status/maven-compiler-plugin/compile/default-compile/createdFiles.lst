@@ -8,7 +8,11 @@ com\umgc\application\user\UserService.class
 com\umgc\application\attendancelog\AttendanceLogRepository.class
 com\umgc\application\userAccess\UserAccessService.class
 com\umgc\application\attendancelog\AttendanceLogController.class
+com\umgc\application\location\LocationService.class
 com\umgc\application\userAccess\UserAccess.class
 com\umgc\application\attendancelog\AttendanceLogService.class
 com\umgc\application\user\UserController.class
+com\umgc\application\location\Location.class
 com\umgc\application\attendancelog\ServiceProperties.class
+com\umgc\application\location\LocationController.class
+com\umgc\application\location\LocationRepository.class

@@ -14,25 +14,16 @@ public class RemoteTerminal {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     
-    private String location;
-    private Long userId;
+    private Long locationId;
     private Long entryTime;
-    
-    
     
 	public RemoteTerminal() {
 		super();
 	}
-	
-	public RemoteTerminal(String location ) {
-		super();
-		this.location = location;
-	}
 
-	public RemoteTerminal(String location, Long userId, Long entryTime) {
+	public RemoteTerminal(Long locationId, Long entryTime) {
 		super();
-		this.location = location;
-		this.userId = userId;
+		this.locationId = locationId;
 		this.entryTime = entryTime;
 	}
 
@@ -44,20 +35,12 @@ public class RemoteTerminal {
 		this.id = id;
 	}
 
-	public String getLocation() {
-		return location;
+	public Long getLocationId() {
+		return locationId;
 	}
 
-	public void setLocation(String location) {
-		this.location = location;
-	}
-
-	public Long getUserId() {
-		return userId;
-	}
-
-	public void setUserId(Long userId) {
-		this.userId = userId;
+	public void setLocationId(Long locationId) {
+		this.locationId = locationId;
 	}
 
 	public Long getEntryTime() {
@@ -70,9 +53,9 @@ public class RemoteTerminal {
 
 	@Override
 	public String toString() {
-		return "RemoteTerminal [id=" + id + ", location=" + location + ", userId=" + userId + ", entryTime=" + entryTime
-				+ "]";
+		return "RemoteTerminal [id=" + id + ", locationId=" + locationId + ", entryTime=" + entryTime + "]";
 	}
+	
 
 
 

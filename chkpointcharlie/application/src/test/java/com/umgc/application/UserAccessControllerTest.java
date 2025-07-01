@@ -63,10 +63,10 @@ public class UserAccessControllerTest {
 
 		userAccessRepository.deleteAll();
 
-		UserAccess userAccessA = new UserAccess("locA");
-		UserAccess userAccessB = new UserAccess("locB");
-		UserAccess userAccessC = new UserAccess("locC");
-		UserAccess userAccessD = new UserAccess("locD");
+		UserAccess userAccessA = new UserAccess(1L, 1L);
+		UserAccess userAccessB = new UserAccess(2L, 1L);
+		UserAccess userAccessC = new UserAccess(1L, 2L);
+		UserAccess userAccessD = new UserAccess(2L, 2L);
 		
 
 		userAccessRepository.saveAll(List.of(userAccessA, userAccessB, userAccessC, userAccessD));
@@ -88,9 +88,9 @@ public class UserAccessControllerTest {
 	@Test
 	public void testCreate() {
 
-		// Create a new UserAccess E
+		// Create a new UserAccess 
 
-		UserAccess userAccessE = new UserAccess("locE");
+		UserAccess userAccessE = new UserAccess(3L, 1L);
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("Content-Type", "application/json");
 		HttpEntity<UserAccess> request = new HttpEntity<>(userAccessE, headers);
@@ -100,33 +100,33 @@ public class UserAccessControllerTest {
 
 		assertEquals(HttpStatus.CREATED, responseEntity.getStatusCode());
 
-		// find User EEE
-		List<UserAccess> list = userAccessRepository.findByLocation("locE");
+		// find User Access
+		List<UserAccess> list = userAccessRepository.findByUserId(1L);
 
 		// Test User EEE details
 		UserAccess myUserAccess = list.get(0);
-		assertEquals("locE", myUserAccess.getLocation());
+		assertEquals("locE", myUserAccess.getUserId());
 		
 	}
 	
 	@Test
 	public void testDeleteById() {
 
-		// Create a new User Access F
+		// Create a new User Access 
 
-		UserAccess userAccessF = new UserAccess ("locF");
+		UserAccess userAccess = new UserAccess (4L, 1L);
 		
-		userAccessRepository.save(userAccessF);
+		userAccessRepository.save(userAccess);
 
-		// find UserAccess F
-		Long userAccessFId = userAccessF.getId();
-		Optional<UserAccess> result = userAccessRepository.findById(userAccessFId);
+		// find UserAccess 
+		Long userAccessId = userAccess.getId();
+		Optional<UserAccess> result = userAccessRepository.findById(userAccessId);
         assertTrue(!result.isEmpty());
 		
         // Delete User EEE
-		userAccessRepository.deleteById(userAccessFId);
+		userAccessRepository.deleteById(userAccessId);
 		
-        result = userAccessRepository.findById(userAccessFId);
+        result = userAccessRepository.findById(userAccessId);
         assertTrue(result.isEmpty());
 	}
 	

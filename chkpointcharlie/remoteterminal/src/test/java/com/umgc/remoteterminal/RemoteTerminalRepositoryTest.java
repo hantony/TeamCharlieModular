@@ -31,7 +31,7 @@ public class RemoteTerminalRepositoryTest {
     	
         // Create a new remote terminal
     	RemoteTerminal terminalA = new RemoteTerminal();
-    	terminalA.setLocation("TerminalLocA");
+    	terminalA.setLocationId(1L);
         
         // save remote terminal
     	remoteTerminalRepository.save(terminalA);
@@ -42,7 +42,7 @@ public class RemoteTerminalRepositoryTest {
 
         RemoteTerminal terminalAFromGet = result.get();
 
-        assertEquals("TerminalLocA", terminalAFromGet.getLocation());
+        assertEquals(1L, terminalAFromGet.getLocationId());
         
     }
 
@@ -50,7 +50,7 @@ public class RemoteTerminalRepositoryTest {
     public void testTerminalCRUD() {
 
     	RemoteTerminal terminalB = new RemoteTerminal();
-    	terminalB.setLocation("locB");
+    	terminalB.setLocationId(1L);
        
         // save remote terminal
     	remoteTerminalRepository.save(terminalB);
@@ -64,10 +64,10 @@ public class RemoteTerminalRepositoryTest {
 
         Long terminalBId = terminalBFromGet.getId();
 
-        assertEquals("locB", terminalBFromGet.getLocation());
+        assertEquals(1L, terminalBFromGet.getLocationId());
         
         // update remote terminal
-        terminalBFromGet.setLocation("locBBB");
+        terminalBFromGet.setLocationId(2L);
         remoteTerminalRepository.save(terminalBFromGet);
 
         // find remote terminal by id
@@ -76,7 +76,7 @@ public class RemoteTerminalRepositoryTest {
 
         RemoteTerminal terminalBFromGet2 = result2.get();
 
-        assertEquals("locBBB", terminalBFromGet2.getLocation());
+        assertEquals(2L, terminalBFromGet2.getLocationId());
        
         // delete a remote terminal
         remoteTerminalRepository.delete(terminalB);

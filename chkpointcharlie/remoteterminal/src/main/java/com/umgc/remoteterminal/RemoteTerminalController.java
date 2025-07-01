@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/RemoteTerminal")
-public class RemoteTerminalControler {
+public class RemoteTerminalController {
 
     @Autowired
     private RemoteTerminalService remoteTerminalService;

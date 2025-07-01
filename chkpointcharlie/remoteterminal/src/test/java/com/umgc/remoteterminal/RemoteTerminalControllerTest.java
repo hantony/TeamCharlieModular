@@ -62,10 +62,10 @@ public class RemoteTerminalControllerTest {
 		
 		Date date = new Date();
 		
-		RemoteTerminal terminalA = new RemoteTerminal("locA", 3L, date.getTime() );
-		RemoteTerminal terminalB = new RemoteTerminal("locB", 3L, date.getTime() );
-		RemoteTerminal terminalC = new RemoteTerminal("locC", 4L, date.getTime() );
-		RemoteTerminal terminalD = new RemoteTerminal("locD", 4L, date.getTime() );
+		RemoteTerminal terminalA = new RemoteTerminal(3L, date.getTime() );
+		RemoteTerminal terminalB = new RemoteTerminal(3L, date.getTime() );
+		RemoteTerminal terminalC = new RemoteTerminal(4L, date.getTime() );
+		RemoteTerminal terminalD = new RemoteTerminal(4L, date.getTime() );
 		
 		remoteTerminalRepository.saveAll(List.of(terminalA, terminalB, terminalC, terminalD));
 	}
@@ -86,45 +86,45 @@ public class RemoteTerminalControllerTest {
 	@Test
 	public void testCreate() {
 
-		// Create a new Remote Terminal Entry E
+		// Create a new Remote Terminal Entry 
 		
 		Date date = new Date();
 
-		RemoteTerminal terminalE = new RemoteTerminal("locE", 3L, date.getTime() );
+		RemoteTerminal terminal = new RemoteTerminal(3L, date.getTime() );
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("Content-Type", "application/json");
-		HttpEntity<RemoteTerminal> request = new HttpEntity<>(terminalE, headers);
+		HttpEntity<RemoteTerminal> request = new HttpEntity<>(terminal, headers);
 
 		// test POST save
 		ResponseEntity<RemoteTerminal> responseEntity = restTemplate.postForEntity(BASEURI + "/RemoteTerminal", request, RemoteTerminal.class);
 
 		assertEquals(HttpStatus.CREATED, responseEntity.getStatusCode());
 
-		// find Remote Terminal Entry EEE
-		List<RemoteTerminal> list = remoteTerminalRepository.findByLocation("locE");
+		// find Remote Terminal Entry 
+		List<RemoteTerminal> list = remoteTerminalRepository.findByLocationId(3L);
 
-		// Test Terminal E details
-		RemoteTerminal myTerminalE = list.get(0);
-		assertEquals("locE", myTerminalE.getLocation());
+		// Test Terminal details
+		RemoteTerminal getTerminal = list.get(0);
+		assertEquals(3L, getTerminal.getLocationId());
 	}
 	
 	@Test
 	public void testDeleteById() {
 
-		// Create a new Remote Terminal F
+		// Create a new Remote Terminal 
 		
 		Date date = new Date();
-		RemoteTerminal newTerminalF = new RemoteTerminal("locF", 3L, date.getTime() );
+		RemoteTerminal newTerminal = new RemoteTerminal(3L, date.getTime() );
 		
-		remoteTerminalRepository.save(newTerminalF);
+		remoteTerminalRepository.save(newTerminal);
 
-		// find Remote Terminal E
-		Long newTerminalId = newTerminalF.getId();
+		// find Remote Terminal 
+		Long newTerminalId = newTerminal.getId();
 		Optional<RemoteTerminal> result = remoteTerminalRepository.findById(newTerminalId);
         assertTrue(!result.isEmpty());
 		
-        // Delete Remote Terminal E
-        remoteTerminalRepository.deleteById(newTerminalF.getId());
+        // Delete Remote Terminal 
+        remoteTerminalRepository.deleteById(newTerminal.getId());
 		
         result = remoteTerminalRepository.findById(newTerminalId);
         assertTrue(result.isEmpty());
