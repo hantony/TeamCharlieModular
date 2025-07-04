@@ -17,3 +17,4 @@ public class RemoteApplication implements WebMvcConfigurer {
         SpringApplication.run(RemoteApplication.class, args);
     }
 }
+

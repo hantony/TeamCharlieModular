@@ -26,19 +26,15 @@ public class CheckPointCharlieGUI {
 		frame.setSize(400, 300);
 		frame.setLayout(new BorderLayout());
 
-		JButton logAttendanceButton = new JButton("Smart Card App");
+		JButton logAttendanceButton = new JButton("Scan Smart Card");
 		logAttendanceButton.setPreferredSize(new Dimension(150, 50));
 		logAttendanceButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
 				System.out.println("Awaiting Smart Card Scans");
-				// new AttendanceLogWindow(); //remove
-
+				
 				// Start Remote Terminal Application
-				System.out.println("TBD");
-			//	System.out.println("Starting Remote Terminal Application...");
-			//	StartRemoteTerminalApplication.main(new String[] {});
+				new ScanSmartCardWindow();
 			}
 		});
 

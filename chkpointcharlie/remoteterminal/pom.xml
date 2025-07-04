@@ -90,7 +90,7 @@
 	</dependencies>
 
 	<build>
-		<plugins>
+		<!--<plugins>
 		
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -106,14 +106,14 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-<!--				<version>3.11.0</version>-->
+				<version>3.11.0</version>
 				<configuration>
 					<source>${java.version}</source>
 					<target>${java.version}</target>
 				</configuration>
 			</plugin>
 			
-		</plugins>
+		</plugins>-->
 	</build>
 
 </project>
