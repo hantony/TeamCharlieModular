@@ -6,4 +6,5 @@ com\umgc\application\UserAccessControllerTest.class
 com\umgc\application\UserControllerTest.class
 com\umgc\application\AttendanceLogControllerTest.class
 com\umgc\application\UserControllerTest$1.class
+com\umgc\application\UserAccessServiceTest.class
 com\umgc\application\AttendanceLogRepositoryTest.class

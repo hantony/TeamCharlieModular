@@ -3,21 +3,21 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	
+
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>3.3.0</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
-	
-	<groupId>com.umgc</groupId>
-	<artifactId>application</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>application</name>
-	<description>Demo project for Spring Boot</description>
-	<dependencies>
 
+	<groupId>com.umgc</groupId>
+	<artifactId>chkpointcharlieUI</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>chkpointcharlieUI</name>
+	<description>Demo project for Spring Boot</description>
+
+	<dependencies>
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -69,25 +69,28 @@
 			<scope>test</scope>
 		</dependency>
 
-
 <!--		<dependency>-->
 <!--			<groupId>com.example</groupId>-->
 <!--			<artifactId>library</artifactId>-->
 <!--			<version>${project.version}</version>-->
 <!--		</dependency>-->
 
-		<!--		<dependency>-->
-		<!--			<groupId>com.example</groupId>-->
-		<!--			<artifactId>remoteterminal</artifactId>-->
-		<!--			<version>${project.version}</version>-->
-		<!--		</dependency>-->
-
+<!--		<dependency>-->
+<!--			<groupId>com.example</groupId>-->
+<!--			<artifactId>application</artifactId>-->
+<!--			<version>${project.version}</version>-->
+<!--		</dependency>-->
+		
+		<dependency>
+			<groupId>com.umgc</groupId>
+			<artifactId>application</artifactId>
+				<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		
 	</dependencies>
 
 	<build>
-
-
-<!--		<plugins>
+		<plugins>
 		
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -103,7 +106,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.11.0</version>
+<!--				<version>3.11.0</version>-->
 				<configuration>
 					<source>${java.version}</source>
 					<target>${java.version}</target>
@@ -111,6 +114,6 @@
 			</plugin>
 			
 		</plugins>
--->	</build>
+	</build>
 
 </project>

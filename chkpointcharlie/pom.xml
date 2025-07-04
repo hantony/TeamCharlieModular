@@ -10,6 +10,7 @@
     <modules>
         <module>application</module>
         <module>remoteterminal</module>
+        <module>chkpointcharlieUI</module>
     </modules>
 
 </project>
