@@ -23,10 +23,6 @@ import com.umgc.application.user.User;
 
 public class StartRemoteTerminalApplication {
 
-//	String LECTURE_HALL_A = "Lecture Hall A";
-//	String STUDENT_LOUNGE = "Student Lounge";
-//	String FACULTY_LOUNGE = "Faculty Lounge";
-
 	public final RestTemplate restTemplate = new RestTemplate();
 
 	private static final Logger log = LoggerFactory.getLogger(StartRemoteTerminalApplication.class);
@@ -62,48 +58,7 @@ public class StartRemoteTerminalApplication {
 			for (User user : users ) {
 				log.info("   User : " + user);
 			}
-
-			AttendanceLog alog = null;
-
-			for (int i = 0; i < 10; ++i) {
-				alog = generateRandomLogEvent();
-				ResponseEntity<AttendanceLog> result = saveAttendanceLogEntry(alog);
-				if (result.getStatusCode() == HttpStatus.CREATED) {
-					log.info("   Created: " + result);
-				} else {
-					log.info("*** There was a problem creating: " + alog );
-				}
-
-				Thread.sleep(1000);				
-			}
-			
-			ResponseEntity<AttendanceLog[]> logEntriesResponse = getAttendanceLogEntries();
-			AttendanceLog[] logEntries = logEntriesResponse.getBody();
-			
-			for ( AttendanceLog logEntry : logEntries ) {
-				log.info("   Current Log Entry : " + logEntry);
-			}
 		};
-	}
-
-	ResponseEntity<AttendanceLog> saveAttendanceLogEntry(AttendanceLog alog) {
-		String MAIN_APP_BASEURI = "http://localhost:" + 8080;
-		HttpHeaders headers = new HttpHeaders();
-		headers.add("Content-Type", "application/json");
-		HttpEntity<AttendanceLog> request = new HttpEntity<>(alog, headers);
-		ResponseEntity<AttendanceLog> responseEntity = restTemplate.postForEntity(MAIN_APP_BASEURI + "/Log", request,
-				AttendanceLog.class);
-		return responseEntity;
-	}
-	
-	ResponseEntity<AttendanceLog[]> getAttendanceLogEntries() {
-		String MAIN_APP_BASEURI = "http://localhost:" + 8080;
-
-		ResponseEntity<AttendanceLog[]> response =
-				  restTemplate.getForEntity(
-						  MAIN_APP_BASEURI + "/Log",
-				  AttendanceLog[].class);
-		return response;
 	}
 	
 	ResponseEntity<User[]> getAllUsers() {
@@ -114,30 +69,6 @@ public class StartRemoteTerminalApplication {
 						  MAIN_APP_BASEURI + "/User",
 				  User[].class);
 		return response;
-	}
-
-
-	AttendanceLog generateRandomLogEvent() {
-
-		long terminalIdRange = 3;
-		long userIdRange = 6;
-		
-		Date date = new Date();
-
-		AttendanceLog alog = new AttendanceLog();
-
-		long randTerminalInt = (int) (Math.random() * terminalIdRange) + 1;
-		long randomUserInt = (int) (Math.random() * userIdRange) + 1;
-
-		alog.setTerminalId(randTerminalInt);
-
-		long randUserInt = (int) (Math.random() * userIdRange);
-
-		alog.setUserId(randomUserInt);
-		alog.setEntryTime(date.getTime());
-		;
-		return alog;
-
 	}
 
 }

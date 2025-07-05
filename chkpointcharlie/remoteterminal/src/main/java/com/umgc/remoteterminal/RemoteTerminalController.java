@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.umgc.application.attendancelog.AttendanceLog;
+
 @RestController
 @RequestMapping("/RemoteTerminal")
 public class RemoteTerminalController {
@@ -38,6 +40,19 @@ public class RemoteTerminalController {
     public RemoteTerminal create(@RequestBody RemoteTerminal terminal) {
         return remoteTerminalService.save(terminal);
     }
+    
+    // initiate a scan request and retrieve result
+    @GetMapping("/scan")
+    public AttendanceLog scan() {
+    	AttendanceLog alog  = remoteTerminalService.scan();
+    	return alog;
+    }
+    
+//    @ResponseStatus(HttpStatus.CREATED) // 
+//    @PostMapping
+//    public RemoteTerminal scan(@RequestBody RemoteTerminal terminal) {
+//        return remoteTerminalService.scan();
+//    }
 
     // update a remote terminal
     @PutMapping

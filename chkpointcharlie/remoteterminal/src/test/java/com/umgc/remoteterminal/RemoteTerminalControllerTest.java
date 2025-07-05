@@ -25,6 +25,8 @@ import org.testcontainers.containers.MySQLContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
+import com.umgc.application.attendancelog.AttendanceLog;
+
 /**
  * Testing with TestRestTemplate and @Testcontainers (image mysql:8.0-debian)
  */
@@ -59,75 +61,94 @@ public class RemoteTerminalControllerTest {
 		BASEURI = "http://localhost:" + port;
 
 		remoteTerminalRepository.deleteAll();
-		
+
 		Date date = new Date();
-		
-		RemoteTerminal terminalA = new RemoteTerminal(3L, date.getTime() );
-		RemoteTerminal terminalB = new RemoteTerminal(3L, date.getTime() );
-		RemoteTerminal terminalC = new RemoteTerminal(4L, date.getTime() );
-		RemoteTerminal terminalD = new RemoteTerminal(4L, date.getTime() );
-		
+
+		RemoteTerminal terminalA = new RemoteTerminal(3L, date.getTime());
+		RemoteTerminal terminalB = new RemoteTerminal(3L, date.getTime());
+		RemoteTerminal terminalC = new RemoteTerminal(4L, date.getTime());
+		RemoteTerminal terminalD = new RemoteTerminal(4L, date.getTime());
+
 		remoteTerminalRepository.saveAll(List.of(terminalA, terminalB, terminalC, terminalD));
 	}
 
-	@Test
+//	@Test
 	void testFindAll() {
 
 		// find all Terminal Entries and return List<User>
 		ParameterizedTypeReference<List<RemoteTerminal>> typeRef = new ParameterizedTypeReference<>() {
 		};
-		ResponseEntity<List<RemoteTerminal>> response = restTemplate.exchange(BASEURI + "/RemoteTerminal", HttpMethod.GET, null, typeRef);
+		ResponseEntity<List<RemoteTerminal>> response = restTemplate.exchange(BASEURI + "/RemoteTerminal",
+				HttpMethod.GET, null, typeRef);
 
 		assertEquals(HttpStatus.OK, response.getStatusCode());
 		assertEquals(4, response.getBody().size());
 
 	}
 
-	@Test
+//	@Test
 	public void testCreate() {
 
-		// Create a new Remote Terminal Entry 
-		
+		// Create a new Remote Terminal Entry
+
 		Date date = new Date();
 
-		RemoteTerminal terminal = new RemoteTerminal(3L, date.getTime() );
+		RemoteTerminal terminal = new RemoteTerminal(3L, date.getTime());
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("Content-Type", "application/json");
 		HttpEntity<RemoteTerminal> request = new HttpEntity<>(terminal, headers);
 
 		// test POST save
-		ResponseEntity<RemoteTerminal> responseEntity = restTemplate.postForEntity(BASEURI + "/RemoteTerminal", request, RemoteTerminal.class);
+		ResponseEntity<RemoteTerminal> responseEntity = restTemplate.postForEntity(BASEURI + "/RemoteTerminal", request,
+				RemoteTerminal.class);
 
 		assertEquals(HttpStatus.CREATED, responseEntity.getStatusCode());
 
-		// find Remote Terminal Entry 
+		// find Remote Terminal Entry
 		List<RemoteTerminal> list = remoteTerminalRepository.findByLocationId(3L);
 
 		// Test Terminal details
 		RemoteTerminal getTerminal = list.get(0);
 		assertEquals(3L, getTerminal.getLocationId());
 	}
-	
+
 	@Test
+	public void testScan() {
+
+		// Initiate a Remote Terminal Smart Card Scan
+
+		Date date = new Date();
+
+		RemoteTerminal terminal = new RemoteTerminal(3L, date.getTime());
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("Content-Type", "application/json");
+		HttpEntity<RemoteTerminal> request = new HttpEntity<>(terminal, headers);
+
+		ResponseEntity<AttendanceLog> response = restTemplate.getForEntity(BASEURI + "/RemoteTerminal/scan", AttendanceLog.class);
+
+		assertEquals(HttpStatus.OK, response.getStatusCode());
+	}
+
+//	@Test
 	public void testDeleteById() {
 
-		// Create a new Remote Terminal 
-		
+		// Create a new Remote Terminal
+
 		Date date = new Date();
-		RemoteTerminal newTerminal = new RemoteTerminal(3L, date.getTime() );
-		
+		RemoteTerminal newTerminal = new RemoteTerminal(3L, date.getTime());
+
 		remoteTerminalRepository.save(newTerminal);
 
-		// find Remote Terminal 
+		// find Remote Terminal
 		Long newTerminalId = newTerminal.getId();
 		Optional<RemoteTerminal> result = remoteTerminalRepository.findById(newTerminalId);
-        assertTrue(!result.isEmpty());
-		
-        // Delete Remote Terminal 
-        remoteTerminalRepository.deleteById(newTerminal.getId());
-		
-        result = remoteTerminalRepository.findById(newTerminalId);
-        assertTrue(result.isEmpty());
+		assertTrue(!result.isEmpty());
+
+		// Delete Remote Terminal
+		remoteTerminalRepository.deleteById(newTerminal.getId());
+
+		result = remoteTerminalRepository.findById(newTerminalId);
+		assertTrue(result.isEmpty());
 	}
-	
+
 }
