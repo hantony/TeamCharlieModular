@@ -74,10 +74,10 @@ public class AttendanceLogControllerTest {
 		Long terminalId3 = Long.valueOf(3);
 		Long terminalId4 = Long.valueOf(4);
 		
-		AttendanceLog newLog1 = new AttendanceLog(userId1, terminalId1, date.getTime());
-		AttendanceLog newLog2 = new AttendanceLog(userId2, terminalId2, date.getTime()+1);
-		AttendanceLog newLog3 = new AttendanceLog(userId3, terminalId3, date.getTime()+2);
-		AttendanceLog newLog4 = new AttendanceLog(userId4, terminalId4, date.getTime()+3);
+		AttendanceLog newLog1 = new AttendanceLog(userId1, terminalId1, "CARD1001", date.getTime());
+		AttendanceLog newLog2 = new AttendanceLog(userId2, terminalId2, "CARD1002", date.getTime()+1);
+		AttendanceLog newLog3 = new AttendanceLog(userId3, terminalId3, "CARD1003", date.getTime()+2);
+		AttendanceLog newLog4 = new AttendanceLog(userId4, terminalId4, "CARD1004", date.getTime()+3);
 		
 		attendanceLogRepository.saveAll(List.of(newLog1, newLog2, newLog3, newLog4));
 	}
@@ -103,7 +103,7 @@ public class AttendanceLogControllerTest {
 		Long userId5 = Long.valueOf(5);
 		Long terminalId5 = Long.valueOf(5);
 		
-		AttendanceLog newLog = new AttendanceLog(userId5, terminalId5, date.getTime());
+		AttendanceLog newLog = new AttendanceLog(userId5, terminalId5, "CARD1001", date.getTime());
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("Content-Type", "application/json");
 		HttpEntity<AttendanceLog> request = new HttpEntity<>(newLog, headers);

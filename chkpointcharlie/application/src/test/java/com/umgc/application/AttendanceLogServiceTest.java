@@ -73,10 +73,10 @@ public class AttendanceLogServiceTest {
 		Long terminalId3 = Long.valueOf(3);
 		Long terminalId4 = Long.valueOf(4);
 		
-		AttendanceLog newLog1 = new AttendanceLog(userId1, terminalId1, date.getTime()   );
-		AttendanceLog newLog2 = new AttendanceLog(userId2, terminalId2, date.getTime()+1 );
-		AttendanceLog newLog3 = new AttendanceLog(userId3, terminalId3, date.getTime()+2 );
-		AttendanceLog newLog4 = new AttendanceLog(userId4, terminalId4, date.getTime()+3 );
+		AttendanceLog newLog1 = new AttendanceLog(userId1, terminalId1, "CARD1001", date.getTime()   );
+		AttendanceLog newLog2 = new AttendanceLog(userId2, terminalId2, "CARD1002", date.getTime()+1 );
+		AttendanceLog newLog3 = new AttendanceLog(userId3, terminalId3, "CARD1003", date.getTime()+2 );
+		AttendanceLog newLog4 = new AttendanceLog(userId4, terminalId4, "CARD1004", date.getTime()+3 );
 		
 		attendanceLogService.save(newLog1);
 		attendanceLogService.save(newLog2);

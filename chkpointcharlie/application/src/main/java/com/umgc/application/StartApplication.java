@@ -62,7 +62,7 @@ public class StartApplication {
 			User u2 = new User("Dextor Poindexter", "Student", "CARD1002", "Status01");
 			User u3 = new User("Dr. Dolittle", "Professor", "CARD1003", "Status02");
 			User u4 = new User("Dr. Annalise Keating", "Professor", "CARD1004", "Status02");
-			User u5 = new User("Will Hunting", "Maintenance", "CARD105", "Status03");
+			User u5 = new User("Will Hunting", "Maintenance", "CARD1005", "Status03");
 			User u6 = new User("Dana White", "Technical Support", "CARD1006", "Status03");
 			
 			// save a few users, ID auto increase, expect 1, 2, 3, 4 ...
@@ -94,18 +94,20 @@ public class StartApplication {
     		Long terminalId3 = Long.valueOf(3);
     		Long terminalId4 = Long.valueOf(4);
     		
-    		AttendanceLog newLog1 = new AttendanceLog(userId1, terminalId1, date.getTime() );
-    		AttendanceLog newLog2 = new AttendanceLog(userId2, terminalId2, date.getTime()+1);
-//    		AttendanceLog newLog3 = new AttendanceLog(userId3, terminalId3, date.getTime()+2);
-//    		AttendanceLog newLog4 = new AttendanceLog(userId4, terminalId4, date.getTime()+3);
-//    		AttendanceLog newLog5 = new AttendanceLog(userId4, terminalId4, date.getTime()+3);
+    		AttendanceLog newLog1 = new AttendanceLog(userId1, terminalId1, "CARD1001", date.getTime() );
+    		
+    		AttendanceLog newLog2 = new AttendanceLog(userId2, terminalId2, "CARD1002", date.getTime()+10);
+    		AttendanceLog newLog3 = new AttendanceLog(userId2, terminalId2, "CARD1002", date.getTime()+20);
+    		
+    		AttendanceLog newLog4 = new AttendanceLog(userId3, terminalId3, "CARD1003", date.getTime()+30);
+    		AttendanceLog newLog5 = new AttendanceLog(userId4, terminalId4, "CARD1004", date.getTime()+40);
+    		AttendanceLog newLog6 = new AttendanceLog(userId4, terminalId4, "CARD1005", date.getTime()+50);
         	
-           
             // save a few users, ID auto increase, expect 1, 2, 3, 4
-            attendanceLogRepository.saveAll(List.of(newLog1, newLog2));
+            attendanceLogRepository.saveAll(List.of(newLog1, newLog2, newLog3));
             // find all log entries
             log.info("-------------------------------");
-            log.info("findAll(), expect 2 log entries");
+            log.info("findAll(), expect 3 log entries");
             log.info("-------------------------------");
             for (AttendanceLog alog : attendanceLogRepository.findAll()) {
                 log.info(alog.toString());

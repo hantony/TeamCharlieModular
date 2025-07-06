@@ -1,33 +1,22 @@
 package com.umgc.swingui;
 
+import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.autoconfigure.domain.EntityScan;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
 import com.umgc.application.attendancelog.AttendanceLog;
 import com.umgc.application.attendancelog.AttendanceLogService;
-
-//import com.umgc.application.user.UserRepository;
-//@SpringBootApplication(scanBasePackages = "com.umgc.application.attendancelog")
-//@EnableJpaRepositories(basePackages = {"com.umgc.application.attendancelog"})
-//@ComponentScan(basePackages = {"com.umgc.application.attendancelog"})
-
-@ComponentScan(basePackages = { "com.umgc.application.attendancelog", "com.umgc.swingui" })
-@EnableJpaRepositories(basePackages = { "attendancelog" })
-@EnableAutoConfiguration
-@EntityScan(basePackages = { "com.umgc.application.attendancelog" })
 
 public class AdminControlPanel {
 
@@ -45,7 +34,7 @@ public class AdminControlPanel {
 
 		JButton addStudentBtn = new JButton("Add New Student");
 		JButton printStudentLogBtn = new JButton("Print A Specific Student's Attendance Log");
-		JButton printTerminalLogBtn = new JButton("Print Teminal Scan Log");
+		JButton printTerminalLogBtn = new JButton("Print Terminal Scan Log");
 
 		addStudentBtn.addActionListener(e -> {
 			System.out.println("Admin selected to add a new student.");
@@ -57,28 +46,29 @@ public class AdminControlPanel {
 		printStudentLogBtn.addActionListener(e -> {
 			System.out.println("Admin selected to print a specific student's attendance log.");
 
-			String userIdStr = JOptionPane.showInputDialog(frame, "Enter Student's Card ID:");
-
-			// AttendanceLogService logService = new AttendanceLogService();
-			// List<AttendanceLog> logList = attendanceLogService.findAll();
+			String cardIdStr = JOptionPane.showInputDialog(frame, "Enter Student's Card ID:");
 
 			ResponseEntity<AttendanceLog[]> logEntriesResponse = getAttendanceLogEntries();
 			AttendanceLog[] logEntries = logEntriesResponse.getBody();
-			//
+
 			for (AttendanceLog logEntry : logEntries) {
-				log.info("   Current Log Entry : " + logEntry);
+				log.info("   Current Log Entry : " + logEntry.toString());
 			}
+
+			displayArrayContents(logEntries, cardIdStr, "Pesonalized Attendance Log");
 		});
 
 		printTerminalLogBtn.addActionListener(e -> {
 			System.out.println("Admin selected to print the terminal log.");
-			
+
 			ResponseEntity<AttendanceLog[]> logEntriesResponse = getAttendanceLogEntries();
 			AttendanceLog[] logEntries = logEntriesResponse.getBody();
 			//
 			for (AttendanceLog logEntry : logEntries) {
 				log.info("   Current Log Entry : " + logEntry);
 			}
+
+			displayArrayContents(logEntries, null, "Attendance Log");
 		});
 
 		frame.add(addStudentBtn);
@@ -88,6 +78,36 @@ public class AdminControlPanel {
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
 	}
+
+	public void displayArrayContents(AttendanceLog[] array, String cardIdStr, String windowTitle) {
+        JFrame logFrame = new JFrame(windowTitle);
+        logFrame.setSize(400, 300);
+        logFrame.setLayout(new BorderLayout());
+ 
+        JTextArea textArea = new JTextArea();
+        textArea.setEditable(false);
+ 
+        String element = null;
+        
+        for (AttendanceLog alog : array) 
+        {
+        	if ( cardIdStr != null ) {
+        		if ( alog.getCardId().equals(cardIdStr )) {
+        			element = alog.toString();
+        			textArea.append(element + "\n");
+        		}
+        	} else {
+        	element = alog.toString();
+            textArea.append(element + "\n");
+        	}
+        }
+ 
+        JScrollPane scrollPane = new JScrollPane(textArea);
+        logFrame.add(scrollPane, BorderLayout.CENTER);
+ 
+        logFrame.setLocationRelativeTo(null);
+        logFrame.setVisible(true);
+    }
 
 	ResponseEntity<AttendanceLog[]> getAttendanceLogEntries() {
 
