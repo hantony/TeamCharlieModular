@@ -40,8 +40,7 @@ public class StartApplication {
 			Location loc1 = new Location(LECTURE_HALL_A);
 			Location loc2 = new Location(STUDENT_LOUNGE);
 			Location loc3 = new Location(FACULTY_LOUNGE);
-			
-			
+						
 			// save a few users, ID auto increase, expect 1, 2, 3, 4
 			locationRepository.saveAll(List.of(loc1, loc2, loc3));
 			
@@ -79,39 +78,39 @@ public class StartApplication {
 		};
 	}
 	
-//    @Bean
-//    public CommandLineRunner initializeAttendanceLogEntries(AttendanceLogRepository attendanceLogRepository) {
-//        return (args) -> {
-//        	
-//        	Date date = new Date();
-//        	
-//        	Long userId1 = Long.valueOf(1);
-//        	Long userId2 = Long.valueOf(2);
-//        	Long userId3 = Long.valueOf(3);
-//        	Long userId4 = Long.valueOf(4);
-//        	
-//        	Long terminalId1 = Long.valueOf(1);
-//    		Long terminalId2 = Long.valueOf(2);
-//    		Long terminalId3 = Long.valueOf(3);
-//    		Long terminalId4 = Long.valueOf(4);
-//    		
-//    		AttendanceLog newLog1 = new AttendanceLog(userId1, terminalId1, date.getTime() );
-//    		AttendanceLog newLog2 = new AttendanceLog(userId2, terminalId2, date.getTime()+1);
+    @Bean
+    public CommandLineRunner initializeAttendanceLogEntries(AttendanceLogRepository attendanceLogRepository) {
+        return (args) -> {
+        	
+        	Date date = new Date();
+        	
+        	Long userId1 = Long.valueOf(1);
+        	Long userId2 = Long.valueOf(2);
+        	Long userId3 = Long.valueOf(3);
+        	Long userId4 = Long.valueOf(4);
+        	
+        	Long terminalId1 = Long.valueOf(1);
+    		Long terminalId2 = Long.valueOf(2);
+    		Long terminalId3 = Long.valueOf(3);
+    		Long terminalId4 = Long.valueOf(4);
+    		
+    		AttendanceLog newLog1 = new AttendanceLog(userId1, terminalId1, date.getTime() );
+    		AttendanceLog newLog2 = new AttendanceLog(userId2, terminalId2, date.getTime()+1);
 //    		AttendanceLog newLog3 = new AttendanceLog(userId3, terminalId3, date.getTime()+2);
 //    		AttendanceLog newLog4 = new AttendanceLog(userId4, terminalId4, date.getTime()+3);
 //    		AttendanceLog newLog5 = new AttendanceLog(userId4, terminalId4, date.getTime()+3);
-//        	
-//           
-//            // save a few users, ID auto increase, expect 1, 2, 3, 4
-//            attendanceLogRepository.saveAll(List.of(newLog1, newLog2, newLog3, newLog4, newLog5));
-//            // find all log entries
-//            log.info("-------------------------------");
-//            log.info("findAll(), expect 5 log entries");
-//            log.info("-------------------------------");
-//            for (AttendanceLog alog : attendanceLogRepository.findAll()) {
-//                log.info(alog.toString());
-//            }
-//        };
-//    }
+        	
+           
+            // save a few users, ID auto increase, expect 1, 2, 3, 4
+            attendanceLogRepository.saveAll(List.of(newLog1, newLog2));
+            // find all log entries
+            log.info("-------------------------------");
+            log.info("findAll(), expect 2 log entries");
+            log.info("-------------------------------");
+            for (AttendanceLog alog : attendanceLogRepository.findAll()) {
+                log.info(alog.toString());
+            }
+        };
+    }
 
 }

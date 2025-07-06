@@ -63,9 +63,7 @@ public class RemoteTerminalService {
 //		Sanity Check
 		ResponseEntity<AttendanceLog[]> logEntriesResponse = getAttendanceLogEntries();
 		AttendanceLog[] logEntries = logEntriesResponse.getBody();
-		
-		
-
+	
 		for (AttendanceLog logEntry : logEntries) {
 			log.info("   Current Log Entry : " + logEntry);
 		}

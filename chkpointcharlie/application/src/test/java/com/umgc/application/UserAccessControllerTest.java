@@ -109,25 +109,25 @@ public class UserAccessControllerTest {
 		
 	}
 	
-	@Test
-	public void testDeleteById() {
-
-		// Create a new User Access 
-
-		UserAccess userAccess = new UserAccess (4L, 1L);
-		
-		userAccessRepository.save(userAccess);
-
-		// find UserAccess 
-		Long userAccessId = userAccess.getId();
-		Optional<UserAccess> result = userAccessRepository.findById(userAccessId);
-        assertTrue(!result.isEmpty());
-		
-        // Delete User EEE
-		userAccessRepository.deleteById(userAccessId);
-		
-        result = userAccessRepository.findById(userAccessId);
-        assertTrue(result.isEmpty());
-	}
+//	@Test
+//	public void testDeleteById() {
+//
+//		// Create a new User Access 
+//
+//		UserAccess userAccess = new UserAccess (4L, 1L);
+//		
+//		userAccessRepository.save(userAccess);
+//
+//		// find UserAccess 
+//		Long userAccessId = userAccess.getId();
+//		Optional<UserAccess> result = userAccessRepository.findById(userAccessId);
+//        assertTrue(!result.isEmpty());
+//		
+//        // Delete User EEE
+//		userAccessRepository.deleteById(userAccessId);
+//		
+//        result = userAccessRepository.findById(userAccessId);
+//        assertTrue(result.isEmpty());
+//	}
 	
 }

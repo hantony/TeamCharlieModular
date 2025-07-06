@@ -47,12 +47,6 @@ public class RemoteTerminalController {
     	AttendanceLog alog  = remoteTerminalService.scan();
     	return alog;
     }
-    
-//    @ResponseStatus(HttpStatus.CREATED) // 
-//    @PostMapping
-//    public RemoteTerminal scan(@RequestBody RemoteTerminal terminal) {
-//        return remoteTerminalService.scan();
-//    }
 
     // update a remote terminal
     @PutMapping

@@ -11,6 +11,10 @@ import org.springframework.stereotype.Service;
 @EnableConfigurationProperties(ServiceProperties.class)
 public class AttendanceLogService {
 
+	public AttendanceLogService() {
+		super();
+		this.serviceProperties = new ServiceProperties();	
+	}
 
 	private final ServiceProperties serviceProperties;
 	
@@ -22,7 +26,8 @@ public class AttendanceLogService {
     private AttendanceLogRepository attendanceLogRepository;
     
     public List<AttendanceLog> findAll() {
-        return attendanceLogRepository.findAll();
+    	List<AttendanceLog> logs = attendanceLogRepository.findAll();
+        return logs;
     }
 
     public Optional<AttendanceLog> findById(Long id) {
