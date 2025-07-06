@@ -41,7 +41,7 @@ public class StartApplication {
 			Location loc2 = new Location(STUDENT_LOUNGE);
 			Location loc3 = new Location(FACULTY_LOUNGE);
 						
-			// save a few users, ID auto increase, expect 1, 2, 3, 4
+			// save a few locations, ID auto increase, expect 1, 2, 3
 			locationRepository.saveAll(List.of(loc1, loc2, loc3));
 			
 			// find all users
@@ -103,7 +103,7 @@ public class StartApplication {
     		AttendanceLog newLog5 = new AttendanceLog(userId4, terminalId4, "CARD1004", date.getTime()+40);
     		AttendanceLog newLog6 = new AttendanceLog(userId4, terminalId4, "CARD1005", date.getTime()+50);
         	
-            // save a few users, ID auto increase, expect 1, 2, 3, 4
+            // save a few attendance log entries, ID auto increase, expect 1, 2, 3
             attendanceLogRepository.saveAll(List.of(newLog1, newLog2, newLog3));
             // find all log entries
             log.info("-------------------------------");

@@ -1,5 +1,6 @@
 package com.umgc.remoteterminal;
 
+import java.text.DecimalFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -18,6 +19,8 @@ import com.umgc.application.attendancelog.AttendanceLog;
 
 @Service
 public class RemoteTerminalService {
+	
+	DecimalFormat df = new DecimalFormat("0000");
 	
 	public final RestTemplate restTemplate = new RestTemplate();
 	private static final Logger log = LoggerFactory.getLogger(RemoteTerminalService.class);
@@ -89,6 +92,12 @@ public class RemoteTerminalService {
 
 		alog.setUserId(randomUserInt);
 		alog.setEntryTime(date.getTime());
+		
+		
+
+		String s = df.format(randUserInt);   // Output: 0009
+		String cardStr = "CARD" + s;
+		alog.setCardId(cardStr);
 		
 		return alog;
 	}
