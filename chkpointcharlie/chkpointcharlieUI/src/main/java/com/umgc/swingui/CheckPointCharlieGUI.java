@@ -31,7 +31,7 @@ import com.umgc.application.attendancelog.AttendanceLog;
 import com.umgc.remoteterminal.RemoteTerminal;
 
 public class CheckPointCharlieGUI {
-	
+
 	private JFrame frame;
 	private RestTemplate restTemplate = new RestTemplate();
 	private static final Logger log = LoggerFactory.getLogger(CheckPointCharlieGUI.class);
@@ -44,18 +44,25 @@ public class CheckPointCharlieGUI {
 
 		JButton scanSmartCardButton = new JButton("Scan Smart Card");
 		scanSmartCardButton.setPreferredSize(new Dimension(150, 50));
-		
+
 		scanSmartCardButton.addActionListener(e -> {
 			System.out.println("Preparing to scan smart card.");
 
-			ResponseEntity<AttendanceLog[]> logEntriesResponse = getAttendanceLogEntries();
-			AttendanceLog[] logEntries = logEntriesResponse.getBody();
-			//
-			for (AttendanceLog logEntry : logEntries) {
-				log.info("   Current Log Entry : " + logEntry);
-			}
+			RestTemplate restTemplate = new RestTemplate();
+			String scanBase = "http://localhost:8081/RemoteTerminal/scan";
 
-			displayArrayContents(logEntries, null, "Attendance Log");
+			Date date = new Date();
+
+			RemoteTerminal terminal = new RemoteTerminal(3L, date.getTime());
+			HttpHeaders headers = new HttpHeaders();
+			headers.add("Content-Type", "application/json");
+			HttpEntity<RemoteTerminal> request = new HttpEntity<>(terminal, headers);
+
+			ResponseEntity<AttendanceLog> response = restTemplate.getForEntity(scanBase, AttendanceLog.class);
+			AttendanceLog alog = response.getBody();
+		
+			System.out.println(alog.toString());
+			displayScanResults(alog, null, "Smart Card Scan Results");
 		});
 
 		JButton adminLoginButton = new JButton("Admin Login");
@@ -79,7 +86,7 @@ public class CheckPointCharlieGUI {
 
 		frame.setVisible(true);
 	}
-	
+
 	ResponseEntity<AttendanceLog[]> getAttendanceLogEntries() {
 
 		String MAIN_APP_BASEURI = "http://localhost:" + 8080;
@@ -88,35 +95,54 @@ public class CheckPointCharlieGUI {
 				AttendanceLog[].class);
 		return response;
 	}
-	
+
 	public void displayArrayContents(AttendanceLog[] array, String cardIdStr, String windowTitle) {
-        JFrame logFrame = new JFrame(windowTitle);
-        logFrame.setSize(400, 300);
-        logFrame.setLayout(new BorderLayout());
- 
-        JTextArea textArea = new JTextArea();
-        textArea.setEditable(false);
- 
-        String element = null;
-        
-        for (AttendanceLog alog : array) 
-        {
-        	if ( cardIdStr != null ) {
-        		if ( alog.getCardId().equals(cardIdStr )) {
-        			element = alog.toString();
-        			textArea.append(element + "\n");
-        		}
-        	} else {
-        	element = alog.toString();
-            textArea.append(element + "\n");
-        	}
-        }
- 
-        JScrollPane scrollPane = new JScrollPane(textArea);
-        logFrame.add(scrollPane, BorderLayout.CENTER);
- 
-        logFrame.setLocationRelativeTo(null);
-        logFrame.setVisible(true);
-    }
+		JFrame logFrame = new JFrame(windowTitle);
+		logFrame.setSize(400, 300);
+		logFrame.setLayout(new BorderLayout());
+
+		JTextArea textArea = new JTextArea();
+		textArea.setEditable(false);
+
+		String element = null;
+
+		for (AttendanceLog alog : array) {
+			if (cardIdStr != null) {
+				if (alog.getCardId().equals(cardIdStr)) {
+					element = alog.toString();
+					textArea.append(element + "\n");
+				}
+			} else {
+				element = alog.toString();
+				textArea.append(element + "\n");
+			}
+		}
+
+		JScrollPane scrollPane = new JScrollPane(textArea);
+		logFrame.add(scrollPane, BorderLayout.CENTER);
+
+		logFrame.setLocationRelativeTo(null);
+		logFrame.setVisible(true);
+	}
+	
+	public void displayScanResults(AttendanceLog alog, String cardIdStr, String windowTitle) {
+		JFrame logFrame = new JFrame(windowTitle);
+		logFrame.setSize(450, 100);
+		logFrame.setLayout(new BorderLayout());
+
+		JTextArea textArea = new JTextArea();
+		textArea.setEditable(false);
+
+		String element = null;
+		
+		element = "   user ID: " + alog.getUserId() + "  card ID: " + alog.getCardId() + "  Terminal: " + alog.getTerminalId() + "  Time: " + alog.getEntryTime() ;
+		textArea.append(element + "\n");
+
+		JScrollPane scrollPane = new JScrollPane(textArea);
+		logFrame.add(scrollPane, BorderLayout.CENTER);
+
+		logFrame.setLocationRelativeTo(null);
+		logFrame.setVisible(true);
+	}
 
 }
