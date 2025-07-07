@@ -27,12 +27,7 @@ public class ScanSmartCardWindow {
 
 	 public ScanSmartCardWindow() {
 		
-        JFrame frame = new JFrame("Scan Smart Card");
-        
-//        JTextField nameField = new JTextField(20);
-//        JTextField roleField = new JTextField();
-//        JTextField cardIdField = new JTextField();
-//        JTextField statusField = new JTextField();
+        JFrame frame = new JFrame("Scan Smart Card2");
         
         JButton submit = new JButton("Scan");
         
@@ -52,13 +47,6 @@ public class ScanSmartCardWindow {
         		ResponseEntity<AttendanceLog> response = restTemplate.getForEntity(BASEURI + "/RemoteTerminal/scan", AttendanceLog.class);
         		AttendanceLog alog = response.getBody();
         		System.out.println(alog.toString());
-        		        		
-//        		ResponseEntity<AttendanceLog[]> logEntriesResponse = getAttendanceLogEntries();
-//    			AttendanceLog[] logEntries = logEntriesResponse.getBody();
-//    			
-//         		for ( AttendanceLog attendanceLogEntry : logEntries ) {
-//          			System.out.println(attendanceLogEntry.toString());
-//         		}
 
             } catch (Exception ex) {
                 ex.printStackTrace();
