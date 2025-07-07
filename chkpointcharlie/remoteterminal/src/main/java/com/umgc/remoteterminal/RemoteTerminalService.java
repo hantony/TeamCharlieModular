@@ -8,19 +8,22 @@ import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import com.umgc.application.attendancelog.AttendanceLog;
+import com.umgc.application.user.User;
 
 @Service
 public class RemoteTerminalService {
 	
-	DecimalFormat df = new DecimalFormat("0000");
+	DecimalFormat df = new DecimalFormat("000");
 	
 	public final RestTemplate restTemplate = new RestTemplate();
 	private static final Logger log = LoggerFactory.getLogger(RemoteTerminalService.class);
@@ -77,52 +80,69 @@ public class RemoteTerminalService {
 	private AttendanceLog generateRandomSmartCardReadEvent() {
 
 		long terminalIdRange = 3;
-		long userIdRange = 6;
+		long userIdRange = 3;
 		
 		Date date = new Date();
 
 		AttendanceLog alog = new AttendanceLog();
-
-		long randTerminalInt = (int) (Math.random() * terminalIdRange) + 1;
-		long randomUserInt = (int) (Math.random() * userIdRange) + 1;
-
-		alog.setTerminalId(randTerminalInt);
-
-		long randUserInt = (int) (Math.random() * userIdRange);
-
-		alog.setUserId(randomUserInt);
-		alog.setEntryTime(date.getTime());
-		
-		
-
-		String s = df.format(randUserInt);   // Output: 0009
+				
+		long randUserInt = (int) (Math.random() * userIdRange) + 1;
+		String s = df.format(randUserInt); 
 		String cardStr = "CARD" + s;
 		alog.setCardId(cardStr);
 		
-		return alog;
-	}
-    
-	AttendanceLog generateRandomSmartCardReadEvent2() {
-
-		long terminalIdRange = 3;
-		long userIdRange = 6;
-		
-		Date date = new Date();
-
-		AttendanceLog alog = new AttendanceLog();
-
 		long randTerminalInt = (int) (Math.random() * terminalIdRange) + 1;
-		long randomUserInt = (int) (Math.random() * userIdRange) + 1;
-
-		alog.setTerminalId(randTerminalInt);
-
-		long randUserInt = (int) (Math.random() * userIdRange);
-
-		alog.setUserId(randomUserInt);
+		alog.setTerminalId(randTerminalInt);		
+//		User u = findUserByCardId(cardStr);
+		
+		alog.setUserId(randUserInt);
 		alog.setEntryTime(date.getTime());
-		;
+		
 		return alog;
 	}
+	
+	
+//	User findUserByCardId( String cardId ) {
+//		
+//		String url = "http://localhost:8080/User";
+//		
+//		// find all Users and return List<User>
+//		ParameterizedTypeReference<List<User>> typeRef = new ParameterizedTypeReference<>() {};
+//		ResponseEntity<List<User>> response = restTemplate.exchange(url, HttpMethod.GET, null, typeRef);
+//		
+//		List<User> users = response.getBody();
+//	
+//		for (User u : users ) {
+//			if ( u.getCardId().equals(cardId )) {
+//				return u;
+//			}
+//		}
+//		
+//		return null;	
+//	}
+
+    
+//	AttendanceLog generateRandomSmartCardReadEvent2() {
+//
+//		long terminalIdRange = 3;
+//		long userIdRange = 3;
+//		
+//		Date date = new Date();
+//
+//		AttendanceLog alog = new AttendanceLog();
+//
+//		long randTerminalInt = (int) (Math.random() * terminalIdRange) + 1;
+//		long randomUserInt = (int) (Math.random() * userIdRange) + 1;
+//
+//		alog.setTerminalId(randTerminalInt);
+//
+//		long randUserInt = (int) (Math.random() * userIdRange);
+//
+//		alog.setUserId(randomUserInt);
+//		alog.setEntryTime(date.getTime());
+//		;
+//		return alog;
+//	}
 	
 	ResponseEntity<AttendanceLog> saveAttendanceLogEntry(AttendanceLog alog) {
 		String MAIN_APP_BASEURI = "http://localhost:" + 8080;

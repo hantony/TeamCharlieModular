@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface UserRepository extends JpaRepository<User, Long> {
 
    List<User> findByName(String name);
+   List<User> findByCardId(String cardId);
 
 //   Custom query
 //       @Query("SELECT b FROM Book b WHERE b.publishDate > :date")

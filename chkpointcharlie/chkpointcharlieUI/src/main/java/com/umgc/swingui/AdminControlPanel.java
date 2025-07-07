@@ -2,6 +2,7 @@ package com.umgc.swingui;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -12,11 +13,14 @@ import javax.swing.JTextArea;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
 import com.umgc.application.attendancelog.AttendanceLog;
 import com.umgc.application.attendancelog.AttendanceLogService;
+import com.umgc.application.user.User;
 
 public class AdminControlPanel {
 
@@ -33,7 +37,7 @@ public class AdminControlPanel {
 		frame.setLayout(new FlowLayout());
 
 		JButton addStudentBtn = new JButton("Add New Student");
-		JButton printStudentLogBtn = new JButton("Print A Specific Student's Attendance Log");
+		JButton printStudentLogBtn = new JButton("Personalized Attendance Log");
 		JButton printTerminalLogBtn = new JButton("Print Terminal Scan Log");
 
 		addStudentBtn.addActionListener(e -> {
@@ -92,8 +96,14 @@ public class AdminControlPanel {
         for (AttendanceLog alog : array) 
         {
         	if ( cardIdStr != null ) {
+        		log.info(  " alog: " + alog.getCardId() + "   cardIdStr: " + cardIdStr );
         		if ( alog.getCardId().equals(cardIdStr )) {
-        			element = alog.toString();
+        			User u = findUserByCardId(cardIdStr);
+        			if ( u != null ) {
+        			element = "   user ID: " + alog.getUserId() + "   name = " + u.getName() + "  card ID: " + alog.getCardId() + "  Terminal: " + alog.getTerminalId() + "  Time: " + alog.getEntryTime() ;
+        			} else {
+        	   			element = "   user ID: " + alog.getUserId() + "  card ID: " + alog.getCardId() + "  Terminal: " + alog.getTerminalId() + "  Time: " + alog.getEntryTime();
+        			}
         			textArea.append(element + "\n");
         		}
         	} else {
@@ -108,6 +118,28 @@ public class AdminControlPanel {
         logFrame.setLocationRelativeTo(null);
         logFrame.setVisible(true);
     }
+	
+	User findUserByCardId( String cardId ) {
+		
+		String url = "http://localhost:8080/User";
+		
+		// find all Users and return List<User>
+		ParameterizedTypeReference<List<User>> typeRef = new ParameterizedTypeReference<>() {};
+		ResponseEntity<List<User>> response = restTemplate.exchange(url, HttpMethod.GET, null, typeRef);
+		
+		
+		List<User> users = response.getBody();
+		//
+		for (User u : users ) {
+			if ( u.getCardId().equals(cardId )) {
+				return u;
+			}
+		}
+		
+		return null;
+		
+		
+	}
 
 	ResponseEntity<AttendanceLog[]> getAttendanceLogEntries() {
 
@@ -117,5 +149,6 @@ public class AdminControlPanel {
 				AttendanceLog[].class);
 		return response;
 	}
+	
 
 }

@@ -31,7 +31,7 @@ public class StartRemoteTerminalApplication {
 		SpringApplication.run(StartRemoteTerminalApplication.class, args);
 	}
 
-	@Bean
+	//@Bean
 	public CommandLineRunner initializeTerminals(RemoteTerminalRepository remoteTerminalRepository) {
 		return (args) -> {
 			
@@ -45,9 +45,9 @@ public class StartRemoteTerminalApplication {
 			remoteTerminalRepository.saveAll(List.of(rt1, rt2, rt3));
 
 			// find all terminals
-			log.info("-------------------------------");
-			log.info("findAll(), expect 3 remote terminals");
-			log.info("-------------------------------");
+	//		log.info("-------------------------------");
+//			log.info("findAll(), expect 3 remote terminals");
+	//		log.info("-------------------------------");
 			for (RemoteTerminal rt : remoteTerminalRepository.findAll()) {
 				log.info(rt.toString());
 			}

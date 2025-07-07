@@ -32,8 +32,34 @@ public class StartApplication {
 	String LECTURE_HALL_A = "Lecture Hall A";
 	String STUDENT_LOUNGE = "Student Lounge";
 	String FACULTY_LOUNGE = "Faculty Lounge";
+
+	//@Bean
+	public CommandLineRunner initializeUsers(UserRepository userRepository) {
+		return (args) -> {
+			
+			User u1 = new User("Alice Johnson", "Student", "CARD001", "Status01");
+			User u2 = new User("Dextor Poindexter", "Student", "CARD002", "Status01");
+			User u3 = new User("Dr. Dolittle", "Professor", "CARD003", "Status02");
+			User u4 = new User("Dr. Annalise Keating", "Professor", "CARD004", "Status02");
+			User u5 = new User("Will Hunting", "Maintenance", "CARD005", "Status03");
+			User u6 = new User("Dana White", "Technical Support", "CARD006", "Status03");
+			
+			// save a few users, ID auto increase, expect 1, 2, 3, 4 ...
+			userRepository.saveAll(List.of(u1, u2, u3, u4, u5, u6));
+			
+			// find all users
+			log.info("-------------------------------");
+			log.info("findAll(), expect 6 users");
+			log.info("-------------------------------");
+			for (User user : userRepository.findAll()) {
+				log.info(user.toString());
+			}
+		};
+	}
 	
-	@Bean
+	
+	
+	//@Bean
 	public CommandLineRunner initializeLocations (LocationRepository locationRepository) {
 		return (args) -> {
 			
@@ -54,31 +80,8 @@ public class StartApplication {
 		};
 	}
 
-	@Bean
-	public CommandLineRunner initializeUsers(UserRepository userRepository) {
-		return (args) -> {
-			
-			User u1 = new User("Alice Johnson", "Student", "CARD1001", "Status01");
-			User u2 = new User("Dextor Poindexter", "Student", "CARD1002", "Status01");
-			User u3 = new User("Dr. Dolittle", "Professor", "CARD1003", "Status02");
-			User u4 = new User("Dr. Annalise Keating", "Professor", "CARD1004", "Status02");
-			User u5 = new User("Will Hunting", "Maintenance", "CARD1005", "Status03");
-			User u6 = new User("Dana White", "Technical Support", "CARD1006", "Status03");
-			
-			// save a few users, ID auto increase, expect 1, 2, 3, 4 ...
-			userRepository.saveAll(List.of(u1, u2, u3, u4, u5, u6));
-			
-			// find all users
-			log.info("-------------------------------");
-			log.info("findAll(), expect 6 users");
-			log.info("-------------------------------");
-			for (User user : userRepository.findAll()) {
-				log.info(user.toString());
-			}
-		};
-	}
-	
-    @Bean
+
+   // @Bean
     public CommandLineRunner initializeAttendanceLogEntries(AttendanceLogRepository attendanceLogRepository) {
         return (args) -> {
         	
