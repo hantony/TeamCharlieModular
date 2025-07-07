@@ -65,7 +65,7 @@ public class AddStudentWindow {
             }
         });
 
-        JPanel panel = new JPanel(new GridLayout(3, 2));
+        JPanel panel = new JPanel(new GridLayout(5, 2));
         panel.add(new JLabel("Name:")); panel.add(nameField);
         panel.add(new JLabel("Role:")); panel.add(roleField);
         panel.add(new JLabel("CardId:")); panel.add(cardIdField);
