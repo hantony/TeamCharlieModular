@@ -75,7 +75,7 @@ public class AddStudentWindow {
 
         frame.setContentPane(panel);
         frame.pack();
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setVisible(true);
     }
 }
