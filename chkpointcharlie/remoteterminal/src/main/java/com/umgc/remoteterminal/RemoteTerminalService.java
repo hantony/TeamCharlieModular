@@ -23,7 +23,7 @@ import com.umgc.application.user.User;
 @Service
 public class RemoteTerminalService {
 	
-	DecimalFormat df = new DecimalFormat("000");
+	DecimalFormat df = new DecimalFormat("00");
 	
 	public final RestTemplate restTemplate = new RestTemplate();
 	private static final Logger log = LoggerFactory.getLogger(RemoteTerminalService.class);
