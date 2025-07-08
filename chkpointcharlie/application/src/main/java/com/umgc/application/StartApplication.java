@@ -37,12 +37,12 @@ public class StartApplication {
 	public CommandLineRunner initializeUsers(UserRepository userRepository) {
 		return (args) -> {
 			
-			User u1 = new User("Alice Johnson", "Student", "CARD001", "Status01");
-			User u2 = new User("Dextor Poindexter", "Student", "CARD002", "Status01");
-			User u3 = new User("Dr. Dolittle", "Professor", "CARD003", "Status02");
-			User u4 = new User("Dr. Annalise Keating", "Professor", "CARD004", "Status02");
-			User u5 = new User("Will Hunting", "Maintenance", "CARD005", "Status03");
-			User u6 = new User("Dana White", "Technical Support", "CARD006", "Status03");
+			User u1 = new User("Alice Johnson", "Student", "CARD01", "Status01");
+			User u2 = new User("Dextor Poindexter", "Student", "CARD02", "Status01");
+			User u3 = new User("Dr. Dolittle", "Professor", "CARD03", "Status02");
+			User u4 = new User("Dr. Annalise Keating", "Professor", "CARD04", "Status02");
+			User u5 = new User("Will Hunting", "Maintenance", "CARD05", "Status03");
+			User u6 = new User("Dana White", "Technical Support", "CARD06", "Status03");
 			
 			// save a few users, ID auto increase, expect 1, 2, 3, 4 ...
 			userRepository.saveAll(List.of(u1, u2, u3, u4, u5, u6));
